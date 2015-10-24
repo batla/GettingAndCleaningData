@@ -39,9 +39,9 @@ featureVariables[,2] <- as.character(featureVariables[,2])
 ## Extract only the data on mean and standard deviation
 featuresDesired <- grep(".*mean.*|.*std.*", featureVariables[,2], ignore.case=TRUE)
 featuresDesired.names <- featureVariables[featuresDesired,2]
-#featuresDesired.names = gsub('-mean', 'Mean', featuresDesired.names)
-#featuresDesired.names = gsub('-std', 'Std', featuresDesired.names)
-#featuresDesired.names <- gsub('[-()]', '', featuresDesired.names)
+featuresDesired.names = gsub('-mean', 'Mean', featuresDesired.names)
+featuresDesired.names = gsub('-std', 'Std', featuresDesired.names)
+featuresDesired.names <- gsub('[-()]', '', featuresDesired.names)
 
 ## load test dataset, using featuresDesired to limit variables
 testActivity <- read.table(file.path(filePath, "test" , "Y_test.txt" ),
