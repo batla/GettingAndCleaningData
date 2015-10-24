@@ -15,7 +15,6 @@ library(reshape2)
 ## begin step 1 & step 2: merging, get only mean & standard deviation,
 ## good column names
 
-
 ## Download data to allow others to run script w/o need to get data first
 ## specify data directory from current working directory
 ## requires internet connection
@@ -40,9 +39,9 @@ featureVariables[,2] <- as.character(featureVariables[,2])
 ## Extract only the data on mean and standard deviation
 featuresDesired <- grep(".*mean.*|.*std.*", featureVariables[,2], ignore.case=TRUE)
 featuresDesired.names <- featureVariables[featuresDesired,2]
-featuresDesired.names = gsub('-mean', 'Mean', featuresDesired.names)
-featuresDesired.names = gsub('-std', 'Std', featuresDesired.names)
-featuresDesired.names <- gsub('[-()]', '', featuresDesired.names)
+#featuresDesired.names = gsub('-mean', 'Mean', featuresDesired.names)
+#featuresDesired.names = gsub('-std', 'Std', featuresDesired.names)
+#featuresDesired.names <- gsub('[-()]', '', featuresDesired.names)
 
 ## load test dataset, using featuresDesired to limit variables
 testActivity <- read.table(file.path(filePath, "test" , "Y_test.txt" ),
@@ -86,16 +85,13 @@ combinedColNames <- colnames(combinedData)
 for (i in 1:length(combinedColNames)) 
 {
   combinedColNames[i] = gsub("\\()","",combinedColNames[i])
-  combinedColNames[i] = gsub("-std$","StandardDeviation",combinedColNames[i])
-  combinedColNames[i] = gsub("-mean","Mean",combinedColNames[i])
-  combinedColNames[i] = gsub("^(t)","time",combinedColNames[i])
-  combinedColNames[i] = gsub("^(f)","freq",combinedColNames[i])
-  combinedColNames[i] = gsub("([Gg]ravity)","Gravity",combinedColNames[i])
-  combinedColNames[i] = gsub("([Bb]ody[Bb]ody|[Bb]ody)","Body",
-                             combinedColNames[i])
-  combinedColNames[i] = gsub("[Gg]yro","Gyrometer",combinedColNames[i])
+  combinedColNames[i] = gsub("^t","time",combinedColNames[i])
+  combinedColNames[i] = gsub("\\(t","time",combinedColNames[i])
+  combinedColNames[i] = gsub("^f","freq",combinedColNames[i])
+  combinedColNames[i] = gsub("BodyBody","Body",combinedColNames[i])
+  combinedColNames[i] = gsub("Gyro","Gyrometer",combinedColNames[i])
   combinedColNames[i] = gsub("AccMag","AcceleratorMagnitude",combinedColNames[i])
-  combinedColNames[i] = gsub("([Bb]odyaccjerkmag)","BodyAcceleratorJerkMagnitude",
+  combinedColNames[i] = gsub("(Bodyaccjerkmag)","BodyAcceleratorJerkMagnitude",
                              combinedColNames[i])
   combinedColNames[i] = gsub("JerkMag","JerkMagnitude",combinedColNames[i])
   combinedColNames[i] = gsub("GyroMag","GyrometerMagnitude",combinedColNames[i])
