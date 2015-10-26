@@ -33,7 +33,7 @@ unzip(zipfile="./data/Dataset.zip",exdir="./data")
 filePath <- file.path("./data" , "UCI HAR Dataset")
 
 ## read features names from seperate features file
-featureVariables <- read.table(file.path(path_rf, "features.txt"),head=FALSE)
+featureVariables <- read.table(file.path(filePath, "features.txt"),head=FALSE)
 featureVariables[,2] <- as.character(featureVariables[,2])
 
 ## Extract only the data on mean and standard deviation
